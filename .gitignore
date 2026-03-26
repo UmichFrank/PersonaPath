@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+test_output_*.pdf
+personapath_test_report.pdf
+results_page_cropped.png
