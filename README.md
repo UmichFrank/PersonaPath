@@ -112,7 +112,7 @@ When ML artefacts are absent the app falls back to a rule-based mock mode so the
 
 ---
 
-## 🛡️ User Privacy & Responsible AI
+## User Privacy & Responsible AI
 
 At Team Foundry, we prioritize user trust and data ethics. PersonaPath is designed with the following principles:
 
