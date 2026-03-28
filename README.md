@@ -110,3 +110,12 @@ When ML artefacts are absent the app falls back to a rule-based mock mode so the
 | `sentence-transformers` | SBERT text embeddings | 2.7.0 |
 | `reportlab` | PDF report generation | 4.1.0 |
 
+---
+
+## 🛡️ User Privacy & Responsible AI
+
+At Team Foundry, we prioritize user trust and data ethics. PersonaPath is designed with the following principles:
+
+* **Data Minimalism:** User text inputs are processed in real-time to generate personality insights and are **not stored** in any permanent database by default.
+* **Non-Prescriptive Guidance:** Our career recommendations are framed as **exploratory tools** rather than definitive professional advice. We aim to spark self-reflection, not to limit a user's potential based on a single algorithm.
+* **Transparency:** We provide a "Confidence Indicator" for our predictions, ensuring users understand that AI models have inherent uncertainties.
