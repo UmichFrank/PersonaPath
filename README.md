@@ -4,6 +4,8 @@
 
 PersonaPath is a text-driven personality assessment tool built on the Big Five (OCEAN) framework. Users write a short self-description and answer up to 8 adaptive follow-up questions. A trained ML pipeline infers personality scores and matches the user to evidence-based career clusters from the O\*NET database.
 
+Demo link: https://personapath.streamlit.app/
+
 ---
 
 ## Features
