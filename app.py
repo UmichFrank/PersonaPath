@@ -969,11 +969,12 @@ def match_bar(ranked: list) -> go.Figure:
         text=[f"#{i+1} {s:.0%}{rank_labels.get(i, '')}" for i, s in enumerate(scores)],
         textposition="outside",
         textfont=dict(color=NAVY, size=11),
+        cliponaxis=False,
     ))
     fig.update_layout(
-        xaxis=dict(range=[0, 1.25], showgrid=False, zeroline=False, showticklabels=False),
+        xaxis=dict(range=[0, 1.45], showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(tickfont=dict(size=12, color=GREY), autorange="reversed", automargin=True),
-        margin=dict(l=0, r=100, t=10, b=10),
+        margin=dict(l=0, r=140, t=10, b=10),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         height=200,
