@@ -1105,7 +1105,7 @@ def generate_pdf(profile: dict, ranked: list, q_count: int, occ_settings: dict |
 
     # ── Two-column layout: Big Five | Career Alignment ─
     # Left: Big Five bar chart (drawn manually)
-    def big5_drawing(profile, w=95*mm):
+    def big5_drawing(profile, w=85*mm):
         bar_h = 9
         gap   = 4
         n     = len(BIG5_KEYS)                       # 5
@@ -1134,7 +1134,7 @@ def generate_pdf(profile: dict, ranked: list, q_count: int, occ_settings: dict |
         return d
 
     # Right: Career alignment bars
-    def career_drawing(ranked, w=75*mm):
+    def career_drawing(ranked, w=85*mm):
         bar_h = 9
         gap   = 5
         n     = len(ranked)                           # 4
@@ -1142,7 +1142,7 @@ def generate_pdf(profile: dict, ranked: list, q_count: int, occ_settings: dict |
         h = n * (bar_h + gap) + 10                   # 4×14 + 10 = 66 pts ≈ 23.3mm
         d = Drawing(w, h)
         label_w  = 40*mm
-        bar_area = w - label_w - 12*mm
+        bar_area = w - label_w - 18*mm
         cl_colors_list = [C_CYAN,
                           colors.HexColor("#93C5FD"),
                           colors.HexColor("#BAE6FD"),
@@ -1172,7 +1172,7 @@ def generate_pdf(profile: dict, ranked: list, q_count: int, occ_settings: dict |
         career_d,
     ]]
     # A4 usable width = 210mm - 18mm*2 = 174mm; left col wider for shifted Big Five labels
-    chart_tbl = Table(chart_data, colWidths=[97*mm, 77*mm])
+    chart_tbl = Table(chart_data, colWidths=[87*mm, 87*mm])
     chart_tbl.setStyle(TableStyle([
         ("VALIGN",      (0,0), (-1,-1), "TOP"),
         ("TOPPADDING",  (0,0), (-1,-1), 4),
