@@ -114,6 +114,18 @@ When ML artefacts are absent the app falls back to a rule-based mock mode so the
 
 ---
 
+## Data Access Statement
+
+This project uses the following data sources:
+
+* **O\*NET Database** — Occupation-level skill and interest profiles from the U.S. Department of Labor's [O\*NET OnLine](https://www.onetonline.org/). The data is public domain.
+* **Pandora Reddit Personality Dataset** — A publicly available dataset of Reddit comments annotated with Big Five personality scores, used to train the KMeans archetype model. Available at [https://psy.takelab.fer.hr/datasets/all/](https://psy.takelab.fer.hr/datasets/all/).
+* **IPIP Big Five Items** — Personality questionnaire items adapted from the International Personality Item Pool ([https://ipip.ori.org/](https://ipip.ori.org/)), a public domain resource.
+
+No proprietary or restricted data is used. All data sources permit academic and non-commercial use.
+
+---
+
 ## User Privacy & Responsible AI
 
 At Team Foundry, we prioritize user trust and data ethics. PersonaPath is designed with the following principles:
