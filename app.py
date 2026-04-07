@@ -12,10 +12,8 @@ To use real models, copy these files into the same directory as app.py:
 """
 
 import streamlit as st
-import streamlit.components.v1 as stc
 import numpy as np
 import plotly.graph_objects as go
-import plotly.express as px
 import os, pickle, json, re, io
 from collections import defaultdict
 from datetime import datetime
@@ -1151,7 +1149,7 @@ def generate_pdf(profile: dict, ranked: list, q_count: int, occ_settings: dict |
         for i, (cluster, score) in enumerate(ranked):
             y = h - (i+1)*(bar_h + gap)
             short = cluster["name"][:22] + ("…" if len(cluster["name"])>22 else "")
-            d.add(String(0, y+1, short, fontSize=7.5, fillColor=C_GREY,
+            d.add(String(0, y+1, short, fontSize=8, fillColor=C_GREY,
                          fontName="Helvetica"))
             d.add(Rect(label_w, y, bar_area, bar_h,
                        fillColor=C_LGREY, strokeColor=None))
