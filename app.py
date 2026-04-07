@@ -1230,7 +1230,7 @@ def generate_pdf(profile: dict, ranked: list, q_count: int, occ_settings: dict |
     mbti_pdf = predict_mbti(profile)
     C_INDIGO = colors.HexColor("#6366F1")
     story.append(HRFlowable(width="100%", thickness=0.5, color=C_LGREY, spaceAfter=2*mm))
-    story.append(Paragraph("<b>MBTI Type (derived from Big Five)</b>", s_section))
+    story.append(Paragraph("<b>MBTI Type (derived from Big Five — for reference only)</b>", s_section))
     mbti_dim_strs = " · ".join(
         f"{d['pole']} ({d['name']}, {d['score']:.0%})" for d in mbti_pdf["dimensions"]
     )
@@ -2108,9 +2108,10 @@ def page_results():
         st.markdown(f"""
         <div style="border-left:3px solid {MBTI_COL};padding-left:0.75rem;margin-bottom:0.7rem;">
           <div style="font-size:0.68rem;font-weight:700;color:{MBTI_COL};text-transform:uppercase;
-                      letter-spacing:0.1em;margin-bottom:3px;">MBTI Personality Type</div>
+                      letter-spacing:0.1em;margin-bottom:3px;">MBTI Personality Type
+            <span style="font-size:0.55rem;font-weight:400;color:#94A3B8;letter-spacing:0;text-transform:none;margin-left:0.4rem;">For reference only</span></div>
           <div style="font-size:0.72rem;color:{GREY};">
-            Derived from Big Five profile via McCrae &amp; Costa (1989) mapping
+            Derived from Big Five profile — interpretive only, Big Five scores are the primary result
           </div>
         </div>
         <div style="background:{WHITE};border:1.5px solid {MBTI_COL}33;
@@ -2162,6 +2163,9 @@ def page_results():
           using multi-trait weighted mapping based on meta-analytic correlations
           (McCrae &amp; Costa, 1989; Furnham, 1996; Wilt &amp; Revelle, 2015).
           Each MBTI dimension draws on multiple Big Five traits for higher accuracy.
+          <br/><b>Note:</b> MBTI is provided for reference only. Big Five scores are the
+          primary, validated result. MBTI type is an approximate interpretation and
+          should not be used as a definitive classification.
         </div>""", unsafe_allow_html=True)
 
     with col_mbti_r:
