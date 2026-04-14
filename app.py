@@ -1706,10 +1706,24 @@ def page_welcome():
                       letter-spacing:-0.03em;margin-bottom:0.9rem;">
             Discover careers that<br>fit your personality.
           </div>
-          <div style="font-size:1.02rem;color:{GREY};max-width:500px;line-height:1.65;">
+          <div style="font-size:1.02rem;color:{GREY};max-width:520px;line-height:1.65;">
             Write freely about yourself, answer a few adaptive questions, and PersonaPath
             infers your Big Five personality profile and matches it to real career clusters
             from the O*NET database.
+          </div>
+          <div style="font-size:0.82rem;color:{GREY};max-width:520px;line-height:1.55;
+                      margin-top:0.7rem;background:{OFF};border:1px solid {LGREY};
+                      border-radius:10px;padding:0.55rem 0.8rem;">
+            <b style="color:{NAVY};">Who is this for?</b> Undergraduate and graduate students
+            exploring career directions, early-career professionals considering a pivot, and
+            anyone curious about how their personality maps to evidence-based occupational clusters.
+          </div>
+          <div style="font-size:0.8rem;color:#065F46;max-width:520px;line-height:1.55;
+                      margin-top:0.6rem;background:#ECFDF5;border:1px solid #A7F3D0;
+                      border-radius:10px;padding:0.55rem 0.8rem;">
+            <b>Your privacy:</b> Your responses are processed in memory only for this session and
+            are <b>never stored</b> on our servers. No account or personal identifier is required,
+            and nothing you write is linked back to you. Closing this tab clears everything.
           </div>
         </div>""", unsafe_allow_html=True)
 
@@ -1748,9 +1762,13 @@ def page_welcome():
         st.markdown(feat_html, unsafe_allow_html=True)
 
         st.markdown(f"""
-        <div style="margin-bottom:0.8rem;">
-          <div style="font-size:0.82rem;font-weight:700;color:{NAVY};margin-bottom:0.4rem;">
+        <div style="margin-bottom:0.5rem;">
+          <div style="font-size:0.82rem;font-weight:700;color:{NAVY};margin-bottom:0.25rem;">
             Choose your assessment style
+          </div>
+          <div style="font-size:0.78rem;color:{GREY};line-height:1.5;margin-bottom:0.4rem;">
+            Three ways to take the assessment — pick whichever feels most comfortable.
+            All three produce the same Big Five profile and O*NET career match.
           </div>
         </div>""", unsafe_allow_html=True)
 
@@ -1758,9 +1776,9 @@ def page_welcome():
             "Assessment mode",
             options=["open", "likert", "hybrid"],
             format_func=lambda m: {
-                "open":   "Open-Text (write freely + adaptive Q&A)",
-                "likert": "Standard Scale (25 IPIP-NEO Likert items, like bigfive-test.com)",
-                "hybrid": "Hybrid (Likert scale first, then open-text for fine-tuning)",
+                "open":   "Open-Text  ·  Write about yourself, then answer a few adaptive follow-ups  ·  Best for users who enjoy self-reflection (≈5 min)",
+                "likert": "Standard Scale  ·  Rate 25 statements on a 1–5 scale (IPIP-NEO, like bigfive-test.com)  ·  Best for users who prefer structured questions (≈4 min)",
+                "hybrid": "Hybrid  ·  Start with the Likert scale, then add an open-text passage for fine-tuning  ·  Best for the most accurate result (≈7 min)",
             }[m],
             index=0,
             label_visibility="collapsed",
@@ -1785,9 +1803,27 @@ def page_welcome():
         demo_profile = {"O": 0.72, "C": 0.58, "E": 0.65, "A": 0.80, "N": 0.38}
         st.plotly_chart(radar_chart(demo_profile, "Sample Profile"), use_container_width=True)
 
-        # Mini stats row below radar
+        # Sample concrete career recommendation, drawn from the Technical & Analytical cluster
         st.markdown(f"""
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-top:-0.3rem;">
+        <div style="background:linear-gradient(135deg,#F0FFF9 0%,#E6F7FF 100%);
+                    border:1.5px solid {GREEN};border-radius:14px;
+                    padding:0.8rem 1rem;margin-top:-0.2rem;margin-bottom:0.7rem;">
+          <div style="font-size:0.66rem;font-weight:700;color:{GREEN};
+                      text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;">
+            Sample best match
+          </div>
+          <div style="display:flex;align-items:baseline;gap:0.5rem;flex-wrap:wrap;">
+            <span style="font-size:1rem;font-weight:800;color:{NAVY};">Data Scientist</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;
+                         font-weight:700;color:{CYAN};">92%</span>
+          </div>
+          <div style="font-size:0.72rem;color:{GREY};margin-top:2px;line-height:1.4;">
+            Technical &amp; Analytical cluster · example occupations:
+            Data Scientist, UX Researcher, Operations Analyst
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;">
           <div style="background:{OFF};border:1px solid {LGREY};border-radius:12px;
                       padding:0.6rem;text-align:center;">
             <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;
@@ -2004,6 +2040,22 @@ def page_results():
       </div>
     </div>""", unsafe_allow_html=True)
 
+    # ── Tabbed layout for deeper content (lighter first-time experience) ──
+    st.markdown(
+        f"<div style='font-size:0.78rem;color:{GREY};margin:0.2rem 0 0.4rem 0;'>"
+        f"Explore your results below — start with the <b>Big Five &amp; Career Match</b> tab, "
+        f"then dive deeper into archetypes or browse specific occupations.</div>",
+        unsafe_allow_html=True,
+    )
+    _pp_tab_bigfive, _pp_tab_deeper, _pp_tab_explore = st.tabs([
+        "Big Five & Career Match",
+        "Archetype & MBTI (deeper)",
+        "O*NET Occupation Explorer",
+    ])
+
+    # Render Archetype + MBTI into the second tab (code order matches original)
+    _pp_tab_deeper.__enter__()
+
     # ── Pandora Personality Archetype ──────────────────
     archetype_id, arch_conf = predict_archetype(profile)
     arch = PANDORA_ARCHETYPES[archetype_id]
@@ -2217,6 +2269,11 @@ def page_results():
 
     st.markdown("<div style='margin-bottom:0.5rem;'></div>", unsafe_allow_html=True)
 
+    _pp_tab_deeper.__exit__(None, None, None)
+
+    # Render Big Five + Career Cluster block into the first tab
+    _pp_tab_bigfive.__enter__()
+
     # ── Two columns: Personality | Careers ────────────────────────────────────
     # Spacer ratio 0.35 ≈ 13% each side → visually aligns with card content indentation
     _gl, col_left, col_right, _gr = st.columns([0.25, 1, 1, 0.25], gap="large")
@@ -2308,6 +2365,11 @@ def page_results():
                 {cluster['n_occ']} O*NET occupations in this cluster
               </div>
             </div>""", unsafe_allow_html=True)
+
+    _pp_tab_bigfive.__exit__(None, None, None)
+
+    # Render O*NET Occupation Explorer into the third tab
+    _pp_tab_explore.__enter__()
 
     # ── Fine-grained O*NET Occupation Matches ──────────
     st.markdown(f"""
@@ -2441,6 +2503,8 @@ def page_results():
 
             with occ_cols[gi % 2]:
                 components.html(card_html, height=205, scrolling=False)
+
+    _pp_tab_explore.__exit__(None, None, None)
 
     # ── Footer actions ─────────────────────────────────
     st.markdown("<div style='margin-top:1.5rem;'></div>", unsafe_allow_html=True)
