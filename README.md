@@ -1,4 +1,4 @@
-# PersonaPath — Adaptive Personality & Career Explorer
+# PersonaPath: Adaptive Personality & Career Explorer
 
 **SIADS 699 Capstone | Team Foundry | University of Michigan**
 
